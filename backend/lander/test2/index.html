@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Random HTML Page with Bootstrap 5</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.6/css/intlTelInput.css">
+  <script src="./js/sdk.js?v=1.0.0"></script>
+</head>
+<style>
+  .iti {
+    width: 100%;
+  }
+
+  .iti__country-list {
+    margin-top: 8px !important;
+    border-radius: 8px;
+    /* overflow-x: hidden;  */
+  }
+
+  .iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+  }
+
+  .form-control.iti--allow-dropdown {
+    display: block;
+  }
+
+  .iti__flag-container {}
+
+  li .iti__country-name,
+  .iti__selected-dial-code {
+    color: #000000;
+  }
+</style>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  .form-header {
+    /* dark color */
+    color: #333333;
+    /* Adjust the text color as needed */
+    padding-bottom: 20px;
+    /* Adjust the padding as needed */
+    border-radius: 10px;
+    /* Rounded corners - adjust as needed */
+  }
+
+  .form-container {
+    /* border: 2px solid #800080; */
+    padding: 20px;
+    /* Padding inside the form - adjust as needed */
+    /* padding left and right */
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #f6f6f6;
+    /* A different background color for the form - adjust as needed */
+    border-radius: 10px;
+    /* Rounded corners - adjust as needed */
+  }
+
+  .form-container input[type=text],
+  .form-container input[type=email],
+  .form-container input[type=tel],
+  .form-container input[type=password] {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* margin: 5px 0 22px 0; */
+    border: none;
+    background: #e1e1e1;
+    border-radius: 10px;
+    /* border color */
+    border: 1px solid #d8d8d8;
+  }
+
+  .d-none-important {
+    display: none !important;
+  }
+
+  .form-logo img {
+    /* border top */
+    border: 20px solid #f6f6f6;
+  }
+
+  .form-logo {
+    border-top: 22px solid #f6f6f6;
+  }
+
+
+  #preloaderWrapper {
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    width: 105%;
+    height: 125%;
+    z-index: 2;
+    top: -50px;
+    left: -15px;
+    -webkit-backdrop-filter: blur(5px);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+      transform: translate3d(0, -10px, 0);
+    }
+
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+
+  #formLogo {
+    animation: float 3s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+
+  .grecaptcha-badge {
+    z-index: 9;
+  }
+</style>
+
+<body>
+  <!-- {{form | safe}} -->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Site Logo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Hero -->
+  <div class="container-fluid py-5 bg-primary text-white">
+    <!-- Welcome message -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h1 class="display-4 text-white">Welcome to our site!</h1>
+          <p class="lead mb-0">We're glad to see you here! Especially our friends from {{ country }}!</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container py-5">
+      <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+          <!-- embeded video -->
+          <!-- rounded corners -->
+          <!-- <div class="ratio ratio-16x9 rounded">
+            <iframe src="https://www.youtube.com/embed/9XaS93WMRQQ?rel=0" title="YouTube video"
+              allowfullscreen></iframe>
+          </div> -->
+        </div>
+        <!-- Lead Form -->
+        <div class="col-lg-4 form-container position-relative form-logo" style="min-height: 300px">
+          <div class="text-center" id="formLogo">
+            <img
+              src="https://raw.githubusercontent.com/HatScripts/circle-flags/35585058722780736d874aed5482e6bd4bf6e0d8/flags/es.svg"
+              style="width: 80px;height: 80px; border-radius: 100px; margin-top: -65px; filter: blur()"
+              alt="country flag">
+          </div>
+          <!-- preloader wrapper -->
+          <div class="position-absolute d-flex align-items-center justify-content-center" id="preloaderWrapper">
+            <!-- preloader -->
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <h2 id="form_header" class="text-center form-header"></h2>
+          <form id="leadForm" class="d-block" >
+            <!-- <div id="step1">
+              <div class="mb-3">
+                <input type="text" class="form-control" id="first_name" name="firstname" value=""
+                  placeholder="First Name" autocomplete="given-name" required>
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control" id="last_name" name="lastname" value="" required
+                  placeholder="Last Name" autocomplete="family-name">
+              </div>
+              <div class="mb-3">
+                <input type="email" class="form-control" id="email" value="" name="email" required placeholder="Email"
+                  autocomplete="email">
+                <div id="email-error" class="invalid-feedback" style="display: none;"></div>
+              </div>
+            </div>
+            <div id="step2" style="display: none">
+              <div class="mb-3">
+                <input type="tel" class="form-control" id="phone_number" name="phone_number" autocomplete="tel"
+                  value="">
+                <div id="phone_number-error" class="invalid-feedback" style="display: none;"></div>
+              </div>
+            </div> -->
+            <!-- <div class="g-recaptcha" data-sitekey="6Ld9aaQmAAAAAO9CXUP4aIeWwlZNKPsMZhhVcKg_"></div> -->
+
+            <!-- Terms and conditions -->
+            <div class="col-12">
+              <div class="form-check float-start">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
+                <label class="form-check-label small text-dark" for="invalidCheck">
+                  <small class="text-muted text-xs">
+                    By checking this box, I acknowledge and agree to the <a href="#" data-bs-toggle="modal"
+                      data-bs-target="#termsOfUseModal" track event="TermsOfCondotion">Terms of Use</a>
+                    and <a href="#" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal" track event="PrivacyPolicy">Privacy Policy</a>.
+                  </small>
+                </label>
+                <div class="invalid-feedback">
+                  You must agree before submitting.
+                </div>
+              </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block w-100 my-4 " id="submit">
+              Submit
+              <span id="submit_text"></span>
+              <span id="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                style="display: none;"></span>
+            </button>
+
+
+            <!-- form group with-->
+          </form>
+
+
+
+
+        </div> <!-- End col div -->
+
+      </div> <!-- End row div -->
+    </div>
+  </div>
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body py-5 px-5 text-center">
+          <h2>
+            Registration Successful!
+          </h2>
+          <!-- generate V sign svg -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="green"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <p>
+            Thank you for your registration. Our representative will be in touch with you soon. Please be available.
+          </p>
+          <!-- autologin modal button -->
+          <a type="button" id="autologin" class="btn btn-primary w-100 mt-2 py-2">OK</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="leadDeclinedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body py-5 px-5 text-center">
+          <h2>
+            Lead Declined
+          </h2>
+          <!-- Generate an "X" sign SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="red"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12"></path>
+          </svg>
+          <p>
+            We're sorry, but your request could not be completed. Please try again or contact our support team for
+            further assistance.
+          </p>
+          <!-- Try again button Close modal    -->
+          <a type="button" id="tryAgain" class="btn btn-primary w-100 mt-2 py-2" data-bs-dismiss="modal">Try
+            Again</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal face" tabindex="-1" role="dialog" id="exitIntentModal" data-bs-backdrop="static"
+    data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Exit Intent Modal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline: none;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Exit Intent Modal</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="outline: none;">Close</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+  <!-- Cards -->
+  <div class="container py-5">
+    <div class="row mt-2">
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{language}}</h5>
+            <p class="card-text">{{city}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card 2</h5>
+            <p class="card-text">Some text to describe card 2</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card 3</h5>
+            <p class="card-text">Some text to describe card 3</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card 4</h5>
+            <p class="card-text">Some text to describe card 4</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 Steps BACKGROUND COLOR -->
+  <div class="container-fluid py-5 bg-dark">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h1 class="display-4 text-white">How it works</h1>
+          <p class="lead mb-0">Here's how it works</p>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-lg-4 col-md-6 p-4">
+          <div class="d-flex align-items-center justify-content-center bg-white mb-3 rounded">
+            <div class="p-4">
+              <h2 class="h4">Step 1</h2>
+              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae nibh odio. Integer
+                tristique, dui ut imperdiet auctor, orci nunc sodales lectus, at gravida justo magna id nibh. Donec
+                euismod, justo et sodales tempor, urna ipsum sagittis tellus, vitae mollis velit purus sit amet
+                nisl.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 p-4">
+          <div class="d-flex align-items-center justify-content-center bg-white mb-3 rounded">
+            <div class="p-4">
+              <h2 class="h4">
+                Step 2
+              </h2>
+              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae nibh odio. Integer
+                tristique, dui ut imperdiet auctor, orci nunc sodales lectus, at gravida justo magna id nibh. Donec
+                euismod, justo et sodales tempor, urna ipsum sagittis tellus, vitae mollis velit purus sit amet
+                nisl.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 p-4">
+          <div class="d-flex align-items-center justify-content-center bg-white mb-3 rounded">
+            <div class="p-4">
+              <h2 class="h4">
+                Step 3
+              </h2>
+              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae nibh odio. Integer
+                tristique, dui ut imperdiet auctor, orci nunc sodales lectus, at gravida justo magna id nibh. Donec
+                euismod, justo et sodales tempor, urna ipsum sagittis tellus, vitae mollis velit purus sit amet
+                nisl.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- privacy policy modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="privacyPolicyModalLabel">Privacy Policy</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="outline: none;">
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Privacy Policy -->
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <h1>Privacy Policy for {{ brand_name }}</h1>
+
+                <p>At {{ brand_name }}, accessible from {{ domain }}, one of our main priorities is the privacy of our
+                  visitors. This Privacy Policy document contains types of information that is collected and recorded
+                  by {{ brand_name }} and how we use it.</p>
+
+                <p>If you have additional questions or require more information about our Privacy Policy, do not
+                  hesitate to contact us.</p>
+
+                <h2>General Data Protection Regulation (GDPR)</h2>
+                <p>We are a Data Controller of your information.</p>
+
+                <p>{{ brand_name }} legal basis for collecting and using the personal information described in this
+                  Privacy Policy depends on the Personal Information we collect and the specific context in which we
+                  collect the information:</p>
+                <ul>
+                  <li>{{ brand_name }} needs to perform a contract with you</li>
+                  <li>You have given {{ brand_name }} permission to do so</li>
+                  <li>Processing your personal information is in {{ brand_name }} legitimate interests</li>
+                  <li>{{ brand_name }} needs to comply with the law</li>
+                </ul>
+
+                <p>{{ brand_name }} will retain your personal information only for as long as is necessary for the
+                  purposes set out in this Privacy Policy. We will retain and use your information to the extent
+                  necessary to comply with our legal obligations, resolve disputes, and enforce our policies.</p>
+
+                <p>If you are a resident of the European Economic Area (EEA), you have certain data protection rights.
+                  If you wish to be informed what Personal Information we hold about you and if you want it to be
+                  removed from our systems, please contact us.</p>
+                <p>In certain circumstances, you have the following data protection rights:</p>
+
+                <ul>
+                  <li>The right to access, update or to delete the information we have on you.</li>
+                  <li>The right of rectification.</li>
+                  <li>The right to object.</li>
+                  <li>The right of restriction.</li>
+                  <li>The right to data portability</li>
+                  <li>The right to withdraw consent</li>
+                </ul>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="outline: none;">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- terms of use moodal -->
+  <!-- Modal -->
+  <div class="modal fade" id="termsOfUseModal" tabindex="-1" aria-labelledby="termsOfUseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="termsOfUseModalLabel">Terms of Use</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="outline: none;">
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Terms of Use -->
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <h1>Terms and Conditions</h1>
+
+                <p>Welcome to {{ brand_name }}!</p>
+
+                <p>These terms and conditions outline the rules and regulations for the use of {{ brand_name }}'s
+                  Website, located at {{ domain }}.</p>
+
+                <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use
+                  {{ brand_name }} if you do not agree to take all of the terms and conditions stated on this
+                  page.</p>
+
+                <p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer
+                  Notice and all Agreements: "Client", "You" and "Your" refers to you, the person log on this website
+                  and compliant to the Company’s terms and conditions. "The Company", "Ourselves", "We", "Our" and
+                  "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves.
+                  All terms refer to the offer, acceptance and consideration of payment necessary to undertake the
+                  process of our assistance to the Client in the most appropriate manner for the express purpose of
+                  meeting the Client’s needs in respect of provision of the Company’s stated services, in accordance
+                  with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words
+                  in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and
+                  therefore as referring to same.</p>
+
+                <h2>Cookies</h2>
+
+                <p>We employ the use of cookies. By accessing {{ brand_name }}, you agreed to use cookies in agreement
+                  with the {{ brand_name }}'s Privacy Policy.</p>
+
+                <p>Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies
+                  are used by our website to enable the functionality of certain areas to make it easier for people
+                  visiting our website. Some of our affiliate/advertising partners may also use cookies.</p>
+
+                <h2>License</h2>
+
+
+                <p>Unless otherwise stated, {{ brand_name }} and/or its licensors own the intellectual property rights
+                  for all material on {{ brand_name }}. All intellectual property rights are reserved. You may access
+                  this from {{ brand_name }} for your own personal use subjected to restrictions set in these terms and
+                  conditions.</p>
+
+                <p>You must not:</p>
+
+                <ul>
+                  <li>Republish material from {{ brand_name }}</li>
+                  <li>Sell, rent or sub-license material from {{ brand_name }}</li>
+                  <li>Reproduce, duplicate or copy material from {{ brand_name }}</li>
+                  <li>Redistribute content from {{ brand_name }}</li>
+
+                </ul>
+
+                <p>This Agreement shall begin on the date hereof.</p>
+
+
+                <p>Parts of this website offer an opportunity for users to post and exchange opinions and information
+                  in certain areas of the website. {{ brand_name }} does not filter, edit, publish or review Comments
+                  prior to their presence on the website. Comments do not reflect the views and opinions of
+                  {{ brand_name }},its agents and/or affiliates. Comments reflect the views and opinions of the person
+                  who post their views and opinions. To the extent permitted by applicable laws, {{ brand_name }}
+                  shall not be liable for the Comments or for any liability, damages or expenses caused and/or
+                  suffered as a result of any use of and/or posting of and/or appearance of the Comments on this
+                  website.</p>
+
+                <p>{{ brand_name }} reserves the right to monitor all Comments and to remove any Comments which can be
+                  considered inappropriate, offensive or causes breach of these Terms and Conditions.</p>
+
+                <p>You warrant and represent that:</p>
+
+                <ul>
+                  <li>You are entitled to post the Comments on our website and have all necessary licenses and
+                    consents to do so;</li>
+                  <li>The Comments do not invade any intellectual property right, including without limitation patent,
+                    trademark or copyright
+                    of any third party;</li>
+                  <li>The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful
+                    material which is an invasion of privacy</li>
+                  <li>The Comments will not be used to solicit or promote business or custom or present commercial
+                    activities or unlawful activity.</li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="outline: none;">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- button -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <button type="button" class="btn btn-primary" track event="MyEvent">
+          Terms of Use
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- another button with "AnotherCustomEvent"-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <button type="button" class="btn btn-primary" track event="AnotherCustomEvents">
+          Another Custom Event
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Footer -->
+  <footer class="bg-light text-center py-3">
+    <p>Some text for the footer</p>
+  </footer>
+
+  <!-- Bootstrap Bundle with Popper.js and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- 2fa -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mockjax/2.6.0/jquery.mockjax.min.js"></script>
+  <script src="./js/2fa.js"></script>
+  <!-- 2fa -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.6/js/intlTelInput.min.js"></script>
+  <script>
+    // LeadAPI
+    $(document).ready(function () {
+      $('[track]').each(function () {
+        var $element = $(this); // This represents each DOM element with "track" attribute
+        var eventType = $element.attr('event-type') || 'click';
+        var eventName = $element.attr('event')
+        $element.on(eventType, function () {
+          LeadAPI.trackEvent(eventName);
+        });
+      });
+    });
+
+  </script>
+  <script>
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0;i < cookies.length;i++) {
+          var cookie = jQuery.trim(cookies[i]);
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+    $("#leadForm").submit(function (event) {
+      event.preventDefault();  // Prevent the form from submitting via the browser.
+      if ($('#step2').is(":hidden")) {
+        $('#step2').show();
+        $('#phone_number').prop('required', true);
+        return;
+      }
+
+      // Hide any error messages.
+      $(".invalid-feedback").hide();
+      $(".is-invalid").removeClass("is-invalid");
+
+
+
+
+
+      // Show the loader and disable the submit button.
+      $("#preloaderWrapper").removeClass("d-none-important");
+      $("#submit").prop("disabled", true);
+      var params = new URLSearchParams(window.location.search);
+      var p = params.get('p');
+
+      var input = document.querySelector("#phone_number");
+
+      var phoneFullNumber = window.intlTelInputGlobals.getInstance(input).getNumber();
+
+      var formData = {
+        first_name: $("#first_name").val(),
+        last_name: $("#last_name").val(),
+        email: $("#email").val(),
+        phone_number: phoneFullNumber,
+        p: p
+      };
+
+      setTimeout(function () {
+        $.ajax({
+          type: "POST",
+          url: "/api/track/push/",
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          },
+          success: function (data) {
+            console.log(data);
+            console.log("Data sent successfully!");
+
+            // set fields to be valid
+            $("#firstName").addClass("is-valid");
+            $("#lastName").addClass("is-valid");
+            $("#email").addClass("is-valid");
+            $("#phone_number").addClass("is-valid");
+            // Hide the loader and enable the submit button.
+            $("#loader").hide();
+            $("#submit").prop("disabled", false);
+            // disable all fields
+            $("#firstName").prop("disabled", true);
+            $("#lastName").prop("disabled", true);
+            $("#email").prop("disabled", true);
+            $("#phone_number").prop("disabled", true);
+
+
+            // Open staticBackdrop Modal with auto login url
+            // auto_login_url = data.auto_login_url;
+            setTimeout(() => {
+              $('#staticBackdrop').modal('show');
+              // set a to redirect to auto_login_url
+              var a = document.getElementById('autologin');
+              a.href = data.auto_login_url;
+            }, 1000);
+
+            // setTimeout(function () {
+            //   window.location.href = auto_login_url;
+            // }, 2000);
+
+            // append pixels
+            for (var i = 0;i < data.pixel.length;i++) {
+              var pixel = data.pixel[i];
+              if (pixel.type == 'inline_script_img') {
+                var img = document.createElement('img');
+                img.src = pixel.content;
+                document.body.appendChild(img);
+              }
+              if (pixel.type == 'inline_script_url') {
+                var script = document.createElement('script');
+                script.src = pixel.content;
+                document.body.appendChild(script);
+              }
+              if (pixel.type == 'inline_iframe_url') {
+                var iframe = document.createElement('iframe');
+                iframe.src = pixel.content;
+                document.body.appendChild(iframe);
+              }
+              if (pixel.type == 'script_evaluate') {
+                eval(pixel.content);
+              }
+              if (pixel.type == 'body_html_insert') {
+                var script = document.createElement('script');
+                script.innerHTML = pixel.content;
+                document.body.appendChild(script);
+              }
+            }
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Failed to send data: " + errorThrown);
+            // Hide the loader and enable the submit button.
+            $("#loader").hide();
+            $("#submit").prop("disabled", false);
+
+            if (jqXHR.status == 400 && jqXHR.responseJSON.validation_errors) {
+              var validation_errors = jqXHR.responseJSON.validation_errors;
+              for (var i = 0;i < validation_errors.length;i++) {
+                var error = validation_errors[i];
+                var field = Object.keys(error)[0];
+                var message = error[field];
+                $("#" + field + "-error").text(message);
+                $("#" + field + "-error").show();
+                // set the field to be invalid
+                $("#" + field).addClass("is-invalid");
+              }
+              return
+            }
+            // if 404 show lead declined modal
+            $('#leadDeclinedModal').modal('show');
+
+          }
+        });
+      }, 0);
+
+    });
+  </script>
+
+  <!-- mouse leaves modal script  -->
+  <script>
+    // var modalShown = false;
+    // $(document).mouseleave(function () {
+    //   if (!modalShown) {
+    //     modalShown = true;
+    //     $('#exitIntentModal').modal('show');
+    //   }
+    // });
+  </script>
+
+  <script>
+    function generateForm(formData) {
+      console.log(formData);
+      // put this <h2 id="form_header" class="text-center form-header"></h2> above the #leadForm
+      var $form = $("#leadForm");
+
+      formData.steps.forEach(function (step) {
+        var $stepDiv = $('<div>', {
+          id: 'step' + step.id,
+          style: step.id === 1 ? '' : 'display: none;'
+        });
+
+        step.lead_profile.forEach(function (field) {
+          var $div = $('<div class="mb-3"></div>');
+          var $input = $('<input>', {
+            type: field.type,
+            class: 'form-control',
+            id: field.key,
+            name: field.key,
+            placeholder: field.place_holder,
+            autocomplete: field.autocomplete,
+            required: true
+          });
+          $div.append($input);
+          $stepDiv.append($div);
+
+
+
+          var $error = $('<div>', {
+            id: field.key + '-error',
+            class: 'invalid-feedback',
+            style: 'display: none;'
+          });
+          $div.append($error);
+        });
+
+        $form.prepend($stepDiv);
+        // if input type tel is exist in the form then add intlTelInput
+        if ($form.find('input[type="tel"]').length) {
+          // put not required on phone number field
+          let input_name = $form.find('input[type="tel"]').attr('name');
+
+          $("#" + input_name).prop('required', false);
+
+          // Initialize phone input (make sure the phone field is visible)
+          LeadAPI.initIntlTelInput(input_name, ['{{country}}'])
+          // add function to get phone number
+          $("#" + input_name).on('blur', function () {
+            var input = document.querySelector("#" + input_name);
+            var phoneFullNumber = window.intlTelInputGlobals.getInstance(input).getNumber();
+            $("#" + input_name).val(phoneFullNumber);
+          });
+        }
+      });
+
+      $("#form_header").text(formData.header);
+      if (formData.toc) {
+        $("#toc").show();
+      }
+      $("#submit").text(formData.submit_button_text).show();
+      // LeadAPI.localizeForm('en');
+    }
+    $(document).ready(function () {
+      var csrftoken = getCookie('csrftoken');
+      // Parse the URL query parameters
+      var params = new URLSearchParams(window.location.search);
+      var p = params.get('p');
+      // Send the AJAX request
+      $.ajax({
+        url: '/api/track/click_land/',
+        type: 'GET',
+        data: { p: p, },
+        success: function (response) {
+          if (response.success) {
+            let form = response.form;
+            setTimeout(() => {
+              generateForm(form);
+              // fade out with display none important
+              $("#preloaderWrapper").fadeOut(200, function () {
+                $(this).addClass("d-none-important");
+                setTestdata();
+              });
+            }, 0);
+          }
+        },
+        error: function (error) {
+          console.log(error);
+        },
+        always: function () {
+          $('#leadForm').show();
+        }
+      });
+    });
+  </script>
+
+  <script>
+    // debig mode
+    window.debug = true;
+    function setTestdata() {
+      if (window.debug) {
+        $('#preloaderWrapper').fadeOut(200, function () {
+          $(this).addClass("d-none-important");
+        });
+        console.log('debug mode is on');
+        // fill form with test data
+        $("#first_name").val('test');
+        $("#last_name").val('test');
+        $("#email").val('test@gmail.com');
+        $("#phone_number").val('0523993882');
+      }
+    }
+  </script>
+
+  <script>
+
+    window.addEventListener('scroll', function () {
+      var formLogo = document.querySelector('#formLogo');
+      var maxMove = 35; // maximum vertical movement in pixels
+      var windowHeight = window.innerHeight;
+      var scrollHeight = document.body.scrollHeight - windowHeight;
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var scrollPercentage = scrollTop / scrollHeight;
+
+      // calculate the vertical movement
+      var move = maxMove * Math.sin(scrollPercentage * Math.PI);
+
+      // apply the transform
+      formLogo.style.setProperty('transform', 'translate3d(0, ' + move + 'px, 0)', 'important');
+    });
+
+
+  </script>
+  <!-- google reCAPTCHA -->
+  <script>
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+  </script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6Ld9aaQmAAAAAO9CXUP4aIeWwlZNKPsMZhhVcKg_"></script>
+  <script>
+    grecaptcha.ready(function () {
+      grecaptcha.execute('6Ld9aaQmAAAAAO9CXUP4aIeWwlZNKPsMZhhVcKg_', { action: 'submit' }).then(function (token) {
+        // Add your logic to send `token` to your server for verification
+        $("#g-recaptcha-response").val(token);
+
+        let p = getParameterByName('p');
+        // post token to server
+        $.ajax({
+          url: '/api/track/recaptcha/',
+          type: 'POST',
+          data: {
+            token: token,
+            p: p,
+          },
+          headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+          },
+          error: function (error) {
+            console.log(error);
+          },
+          always: function () {
+
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>

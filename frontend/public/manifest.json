@@ -1,0 +1,9 @@
+{
+    "name": "Panmedia | Lead Distribution System",
+    "short_name": "Panmedia",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#3f51b5",
+    "description": "Panmedia is a digital agency that helps affiliates and advertisers to maximize their online potential."
+}

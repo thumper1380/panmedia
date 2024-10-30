@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Example Page</title>
+  <script>
+        (function() {
+      var globalObjectName = '_XvxgNVVQsCczDdHZ';
+
+      // Check if the global object is not defined
+      if (!window[globalObjectName]) {
+        // Define the global object with initial properties
+        window[globalObjectName] = {
+          unique: false,
+          ttl: 86400,  // Time-to-live value in seconds
+          basePath: 'http://localhost:8000/api/track/BKbGOSs/'  // Base URL path
+        };
+      }
+
+      // Check if 'config' item exists in the localStorage
+      const configItem = localStorage.getItem('config');
+      if (typeof configItem !== 'undefined' && configItem !== null) {
+        // Parse the 'config' item as JSON
+        var configData = JSON.parse(configItem);
+
+        // Get the current timestamp in seconds
+        var currentTimestamp = Math.round(+new Date() / 1000);
+
+        // Check if the stored data has expired
+        if (configData.created_at + window[globalObjectName].ttl < currentTimestamp) {
+          // Remove stored items if expired
+          localStorage.removeItem('subId');
+          localStorage.removeItem('token');
+          localStorage.removeItem('config');
+        }
+      }
+
+      // Retrieve 'subId' and 'token' from localStorage
+      var subId = localStorage.getItem('subId');
+      var token = localStorage.getItem('token');
+
+      // Construct the URL query string
+      var queryString = '?return=js.client';
+      queryString += '&' + decodeURIComponent(window.location.search.replace('?', ''));
+      queryString += '&se_referrer=' + encodeURIComponent(document.referrer);
+      queryString += '&default_keyword=' + encodeURIComponent(document.title);
+      queryString += '&landing_url=' + encodeURIComponent(document.location.hostname + document.location.pathname);
+      // queryString += '&name=' + encodeURIComponent(globalObjectName);
+      // queryString += '&host=' + encodeURIComponent(window[globalObjectName].basePath);
+
+      // Append 'sub_id' and 'token' if they exist and unique flag is set
+      if (typeof subId !== 'undefined' && subId && window[globalObjectName].unique) {
+        queryString += '&sub_id=' + encodeURIComponent(subId);
+      }
+      if (typeof token !== 'undefined' && token && window[globalObjectName].unique) {
+        queryString += '&token=' + encodeURIComponent(token);
+      }
+
+      // Create a script element with the generated URL
+      var scriptElement = document.createElement('script');
+      scriptElement.type = 'application/javascript';
+      scriptElement.src = window[globalObjectName].basePath + queryString;
+
+      // Insert the script element into the document
+      var headElement = document.getElementsByTagName('head')[0];
+      headElement.appendChild(scriptElement);
+    })();
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+DEFAULT_PUSH_STATUS = 'New'
+
+DEFAULT_TEST_AUTO_LOGIN_URL = 'https://example.com'
